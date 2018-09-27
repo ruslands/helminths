@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    {% load mathfilters %}
+    {% load staticfiles %}
+
+    <!-- <script src="{% static "main/js/test.js" %}"></script> -->
+    <script src="{% static "main/js/jquery.min.js" %}"></script>
+    <script src="{% static "main/js/maskedinput.js" %}"></script>
+    <script src="{% static "main/js/main.js" %}"></script>
+
+    <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/stylename.css' %}">
+
+
+     <meta name="viewport" content="width=device-width,initial-scale=1" />
+</head>
+<body>
+
+<script type="text/javascript">
+   jQuery(function($){
+   $("#phone").mask("+7(999) 999-9999");
+   });
+</script>
+
+<form method="POST" action="" class="" name="myform" enctype="multipart/form-data">{% csrf_token %}
+
+  <div class="lside result">
+
+    <img id='photo_url' src="{% static photo_url %}" alt="Для сравнения исходной фотографии и визуализации алгоритма, наведите на фотографию" width="500px" height="400px" align="center" style="margin-top:7px;margin-left:7px;display:block;">
+    <img name="result_image" id='photo_url2' src="{% static photo_url2 %}" alt="Для сравнения исходной фотографии и визуализации алгоритма, наведите на фотографию" width="500px" height="400px" align="center" style="margin-top:7px;margin-left:7px;position:absolute;top:0px">
+
+  </div>
+
+  <div class="rside">
+      <h3>Важно знать!</h3>
+      <img height="62px" width="62px" alt="Изображение для примера" class="my_img" src="{% static 'main/img/2.png' %}"/>
+      <ol>
+          <li class="TextNormal"><p>Детектор <br>для описторхов</p></li>
+          <li class="TextNormal"><p>Яйца должны быть<br>окрашены</p></li>
+      </ol>
+      <div class="file_upload" style="background: url('{% static 'main/img/4.png' %}'); background-size: cover;">
+          <label>
+              <input type="file" name="image" accept="image/x-png, image/jpeg">
+              <span>загрузить фото</span>
+          </label>
+      </div>
+      <button type="submit" class="btn button_submit"><span>ПРОВЕРИТЬ</span></button>
+  </div>
+
+</form>
+{% block javascript %}
+<script type="text/javascript">
+
+  // var cc = myform.result_image,  events  = ['mouseover'];
+  // for (var i in events) {
+  //   cc.addEventListener(events[i], formatCardCode, false);
+  // }
+  // function formatCardCode() {
+  //   cc.className += "otherclass";
+  // }
+
+  var cc = myform.result_image;
+  cc.addEventListener('mouseover', formatCardCode, false);
+  function formatCardCode() {
+    cc.classList.add('hide');
+  }
+  cc.addEventListener('mouseout', delClass, false);
+  function delClass() {
+    cc.classList.remove('hide');
+  }
+
+</script>
+{% endblock %}
+</body>
+</html>
