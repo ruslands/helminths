@@ -305,6 +305,37 @@ text-align: center;
     background-size: cover;
     background-position: center;
 }
+/*Anova result table style*/
+.dataframe {
+  width: 400px;
+  height: 400px;
+  margin: 0 auto;
+}
+
+.check_test {
+  width: 100%;
+  height: 80px;
+  text-align: center;
+}
+
+.check_test p{
+  margin-top: 15px;
+  line-height: 2em;
+}
+
+.p-value{
+  cursor: pointer;
+  font-size: 12px !important;
+  color: grey !important;
+}
+
+.overlay{
+  display:none;
+  position: absolute;
+}
+a:hover .overlay{
+ display: block;
+}
 
 @media all and (min-width: 600px) {html, body {height: 100%;}}
 @media all and (max-width: 600px) {form {width: 290px;margin: 25px 0 25px 0}}

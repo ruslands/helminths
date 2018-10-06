@@ -306,5 +306,6 @@ text-align: center;
     background-position: center;
 }
 
+
 @media all and (min-width: 600px) {html, body {height: 100%;}}
 @media all and (max-width: 600px) {form {width: 290px;margin: 25px 0 25px 0}}
