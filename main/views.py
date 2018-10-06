@@ -83,12 +83,6 @@ def basic(request):
     form = ImageUploadForm()
     return render(request, 'main/basic.html')
 
-# def handle_uploaded_excel(image):
-#     # save image in to static/media - Nginx/Gunicorn
-#     path = default_storage.save('', ContentFile(image))
-#     full_path = os.path.join(settings.MEDIA_ROOT, path)
-#     image_name = 'uploads/' + path
-#     return full_path
 
 
 def handle_uploaded_image(image):
@@ -105,5 +99,5 @@ def detect_image(full_path):
     img = TRANSFORM_IMG_TEST(cv2.imread(full_path)[...,::-1]).unsqueeze(0)
     res = model(img)
     res_FOR_VISUAL = res[0][0].data.numpy()
-    # scipy.misc.imsave('static/outfile.jpg', res_FOR_VISUAL) # for web-server
-    scipy.misc.imsave('main/static/outfile.jpg', res_FOR_VISUAL) # for local-server
+    scipy.misc.imsave('static/outfile.jpg', res_FOR_VISUAL) # for web-server
+    # scipy.misc.imsave('main/static/outfile.jpg', res_FOR_VISUAL) # for local-server
