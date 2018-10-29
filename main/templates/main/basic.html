@@ -16,20 +16,36 @@
      <meta name="viewport" content="width=device-width,initial-scale=1" />
 </head>
 <body>
-
-<form method="POST" action="" class="" name="myform" enctype="multipart/form-data">{% csrf_token %}
-
   <div class="lside result">
     {% if photo_url or photo_url2 %}
     <img id='photo_url' src="{% static photo_url %}" alt="Для сравнения исходной фотографии и визуализации алгоритма, наведите на фотографию" width="500px" height="420px" align="center" style="margin-top:7px;margin-left:7px;display:block;">
     <img name="result_image" id='photo_url2' src="{% static photo_url2 %}" alt="Для сравнения исходной фотографии и визуализации алгоритма, наведите на фотографию" width="500px" height="420px" align="center" style="margin-top:7px;margin-left:7px;position:absolute;top:0px">
     {% endif %}
     {% if result %}
-    {{ result|safe }}
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-sm">p-value*</button>
-    {% endif %}
 
+    {% for i in qwe %}
+        <li>{{ i }}</li>
+    {% endfor %}
+
+    {{ result|safe }}
+    <div class="methods">
+      <button type="button" class="btn btn-warning" data-toggle="modal" data-target=".bd-example-modal-sm">p-value*</button>
+      <form method="POST" action="" class="" name="myform" enctype="multipart/form-data">{% csrf_token %}
+        <input type="hidden" name="t_test" value="anova">
+        <button type="submit" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-sm">ANOVA</button>
+      </form>
+      <form method="POST" action="" class="" name="myform" enctype="multipart/form-data">{% csrf_token %}
+        <input type="hidden" name="t_test" value="t_test">
+        <button type="submit" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-sm">t-test</button>
+      </form>
+      <form method="POST" action="" class="" name="myform" enctype="multipart/form-data">{% csrf_token %}
+        <input type="hidden" name="t_test" value="tukeys">
+        <button type="submit" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-sm">Tukey's test (HSD)</button>
+      </form>
+    </div>
+    {% endif %}
   </div>
+<form method="POST" action="" class="" name="myform" enctype="multipart/form-data">{% csrf_token %}
   <div class="rside">
     <div class="check_test">
       <p>
@@ -79,14 +95,21 @@
 </script>
 {% endblock %}
 
-<!-- Небольшой модальное окно -->
+<!-- Небольшое модальное окно -->
 <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
+      <h3>p-value for ANOVA</h3>
+      <p>Null hypothesis (H0): u1 = u2</p>
+      <p>Alternative hypothesis (HA): u1 ≠ u2</p>
+      <p>If the p-value is less than what is tested at, most commonly 0.05, one can reject the null hypothesis.</p>
       <p>р (х) < 0,01 очень убедительные доказательства</p>
       <p>p (X) ∈ (0.01, 0.05) убедительные доказательства</p>
       <p>p (X) ∈ (0,05, 0,1) слабые доказательства</p>
       <p>p (X)> 0,1 мало или вообще нет доказательств</p>
+      <h3>p-value for <b>t-test</b> with <b>Bonferroni</b> correction</h3>
+      <p>Number of groups: {{num_pairs}}</p>
+      <p>p-value: {{0.05|div:num_pairs|floatformat:'5'}}</p>
     </div>
   </div>
 </div>

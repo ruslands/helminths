@@ -12,24 +12,34 @@ body {
     align-content: center;
 }
 
+.modal-content{
+  width: 500px;
+}
+.modal-content p{
+  padding-left: 25px;
+  padding-right: 15px;
+}
+
 form {
     min-height: auto;
     background: #FFFFFF;
-    border-radius: 5px;
     display: flex;
     flex-wrap: wrap;
+    border-radius: 0 5px 5px 0;
 }
 .hide{
     opacity: 0;
 }
 .lside {
-    height: auto;
-    width: 500px;
+    height: 470px;
+    width: auto;
     position: relative;
+    background-color: white;
+    border-radius: 5px 0 0 5px;
 }
 
 .rside {
-    height: auto;
+    height: 470px;
     width: 290px;
     position: relative;
 }
@@ -310,6 +320,7 @@ text-align: center;
   width: 400px;
   height: 400px;
   margin: 0 auto;
+  margin-left: 25px;
 }
 
 .check_test {
@@ -321,6 +332,17 @@ text-align: center;
 .check_test p{
   margin-top: 15px;
   line-height: 2em;
+}
+
+.methods {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 50px;
+  width: 80%;
+}
+.methods form{
+  width: 50px;
 }
 
 .p-value{
